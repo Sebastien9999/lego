@@ -2,81 +2,331 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>🧱 Lego | Predictability of a lego set deal</title>
+    <title>Lego Deal finder</title>
+    <style>
+      :root {
+        color: #4a341a;
+        background: #fff7db;
+        font-family: Inter, system-ui, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+      }
+
+      body {
+        background: linear-gradient(180deg, #fff7db 0%, #fff0b5 100%);
+      }
+
+      main {
+        width: min(1240px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 24px 0 48px;
+        display: grid;
+        gap: 24px;
+      }
+
+      h1,
+      h2 {
+        margin: 0;
+        color: #15243a;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 3vw, 3rem);
+      }
+
+      #topbar {
+        display: grid;
+        gap: 18px;
+      }
+
+      #topbar-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      #search-wrapper {
+        display: grid;
+        width: min(100%, 420px);
+        gap: 8px;
+      }
+
+      label {
+        font-size: 0.95rem;
+        color: #7a5a26;
+      }
+
+      input,
+      select {
+        width: 100%;
+        border: 1px solid #f0d090;
+        border-radius: 14px;
+        padding: 12px 14px;
+        background: #fff7e0;
+        font-size: 0.98rem;
+        color: #4a341a;
+      }
+
+      input:focus,
+      select:focus {
+        outline: none;
+        border-color: #d28b00;
+        box-shadow: 0 0 0 4px rgba(210, 139, 0, 0.16);
+      }
+
+      #options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+        padding: 20px;
+        border-radius: 22px;
+        background: #fff8e7;
+        box-shadow: 0 26px 70px rgba(125, 82, 10, 0.08);
+      }
+
+      #lego,
+      #indicators,
+      #sales,
+      #deals {
+        padding: 20px;
+        border-radius: 24px;
+        background: #ffffff;
+        box-shadow: 0 26px 70px rgba(18, 38, 63, 0.08);
+      }
+
+      #best-deal {
+        display: grid;
+        place-items: center;
+        padding: 30px;
+        min-height: 260px;
+        text-align: center;
+        border-radius: 28px;
+        background: linear-gradient(135deg, #f9b700 0%, #ffe066 100%);
+        color: #4a341a;
+        box-shadow: 0 36px 90px rgba(170, 112, 0, 0.22);
+      }
+
+      #best-deal h2 {
+        font-size: clamp(1.4rem, 2vw, 2rem);
+      }
+
+      .deal-card {
+        width: min(880px, 100%);
+        padding: 24px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: inset 0 0 0 1px rgba(255, 235, 159, 0.4);
+        display: grid;
+        gap: 14px;
+      }
+
+      .deal-card strong {
+        display: block;
+        font-size: 1.3rem;
+      }
+
+      .deal-card a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.15rem;
+        font-weight: 700;
+      }
+
+      .deal-card .price {
+        font-size: 1.5rem;
+      }
+
+      .deal-card .meta {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 12px;
+        color: rgba(255, 255, 255, 0.87);
+      }
+
+      #deals h2 {
+        margin-bottom: 16px;
+      }
+
+      #deals-list {
+        display: grid;
+        gap: 12px;
+        max-height: 520px;
+        overflow-y: auto;
+        padding-right: 4px;
+      }
+
+      .deal-row {
+        display: grid;
+        grid-template-columns: minmax(64px, 88px) 1fr minmax(90px, 140px);
+        gap: 12px;
+        align-items: center;
+        padding: 16px;
+        border: 1px solid #f3d297;
+        border-radius: 18px;
+        background: #fff5d6;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+      }
+
+      .deal-row:hover {
+        transform: translateY(-1px);
+        border-color: #f3b417;
+      }
+
+      .deal-row .price {
+        justify-self: end;
+        font-weight: 700;
+        color: #102a57;
+      }
+
+      .deal-row .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        color: #64748b;
+        font-size: 0.9rem;
+      }
+
+      #indicators > div,
+      #lego > div {
+        display: grid;
+        gap: 8px;
+      }
+
+      #indicators > div {
+        grid-template-columns: auto 1fr;
+        padding: 12px 0;
+        border-bottom: 1px solid #f1f5f9;
+      }
+
+      #indicators > div:last-child {
+        border-bottom: none;
+      }
+
+      @media (min-width: 900px) {
+        main {
+          grid-template-columns: 1fr 1fr;
+          align-items: start;
+        }
+
+        #topbar,
+        #best-deal,
+        #deals,
+        #indicators,
+        #lego,
+        #sales {
+          grid-column: span 2;
+        }
+      }
+    </style>
   </head>
   <body>
-    <h1>Lego</h1>
-    <section id="options">
-      <div id="show">
-        <label for="show-select">Show:</label>
-        <select name="show" id="show-select">
-          <option value="6">6</option>
-          <option value="12">12</option>
-          <option value="24">24</option>
-        </select>
-      </div>
-      <div id="page">
-        <label for="page-select">Go to page:</label>
-        <select name="page" id="page-select"> </select>
-      </div>
-      <div id="filters">
-        <label for="filters-select">Filters:</label>
-        <select name="filters" id="filters-select">
-          <option value="all">All deals</option>
-          <option value="best-discount">By best discount</option>
-          <option value="best-price">By best price</option>
-          <option value="most-commented">By most commented</option>
-          <option value="hot-deals">By hot deals</option>
-        </select>
-      </div>
-      <div id="sort">
-        <label for="sort-select">Sort:</label>
-        <select name="sort" id="sort-select">
-          <option value="price-asc">Cheaper</option>
-          <option value="price-desc">Expensive</option>
-          <option value="date-asc">Recently published</option>
-          <option value="date-desc">Anciently published</option>
-        </select>
-      </div>
-    </section>
-    <section id="lego">
-      <h2>Lego sets</h2>
-      <div>
-        <label>Lego set id:</label>
-        <select id="lego-set-id-select"></select> 
-      </div>
-    </section>
-    <section id="indicators">
-      <h2>Indicators</h2>
-      <div>
-        <span>Number of deals</span>
-        <span id="nbDeals">0</span>
-      </div>
-      <div>
-        <span>Number of sales</span>
-        <span id="nbSales">0</span>
-      </div>
-      <div>
-        <span>Average sales price value</span>
-        <span id="avgPrice">0</span>
-      </div>
-      <div>
-        <span>p5 sales price value</span>
-        <span id="p5Price">0</span>
-      </div>
-      <div>
-        <span>p25 sales price value</span>
-        <span id="p25Price">0</span>
-      </div>
-      <div>
-        <span>p50 sales price value</span>
-        <span id="p50Price">0</span>
-      </div>
-    </section>
-    <section id="deals"></section>
-    <section id="sales">
-      <h2>Vinted Sales</h2>
-    </section>
+    <main>
+      <section id="topbar">
+        <div id="topbar-wrapper">
+          <div>
+            <h1>Lego Deal Finder</h1>
+          </div>
+          <div id="search-wrapper">
+            <label for="search-input">Search deals</label>
+            <input id="search-input" type="search" placeholder="Search by title or set id" />
+          </div>
+        </div>
+        <section id="options">
+          <div id="show">
+            <label for="show-select">Show:</label>
+            <select name="show" id="show-select">
+              <option value="6">6</option>
+              <option value="12">12</option>
+              <option value="24">24</option>
+            </select>
+          </div>
+          <div id="page">
+            <label for="page-select">Go to page:</label>
+            <select name="page" id="page-select"> </select>
+          </div>
+          <div id="filters">
+            <label for="filters-select">Filters:</label>
+            <select name="filters" id="filters-select">
+              <option value="all">All deals</option>
+              <option value="best-discount">By best discount</option>
+              <option value="best-price">By best price</option>
+              <option value="most-commented">By most commented</option>
+              <option value="hot-deals">By hot deals</option>
+            </select>
+          </div>
+          <div id="sort">
+            <label for="sort-select">Sort:</label>
+            <select name="sort" id="sort-select">
+              <option value="price-asc">Cheaper</option>
+              <option value="price-desc">Expensive</option>
+              <option value="date-asc">Recently published</option>
+              <option value="date-desc">Anciently published</option>
+            </select>
+          </div>
+        </section>
+      </section>
+
+      <section id="best-deal">
+        <h2>Best Deal</h2>
+        <div class="deal-card">
+          <strong>No deal selected yet</strong>
+          <span>Load deals to see the best deal in the middle of the page.</span>
+        </div>
+      </section>
+
+      <section id="deals">
+        <h2>Deals</h2>
+        <div id="deals-list"></div>
+      </section>
+
+      <section id="lego">
+        <h2>Lego sets</h2>
+        <div>
+          <label>Lego set id:</label>
+          <select id="lego-set-id-select"></select>
+        </div>
+      </section>
+      <section id="indicators">
+        <h2>Indicators</h2>
+        <div>
+          <span>Number of deals</span>
+          <span id="nbDeals">0</span>
+        </div>
+        <div>
+          <span>Number of sales</span>
+          <span id="nbSales">0</span>
+        </div>
+        <div>
+          <span>Average sales price value</span>
+          <span id="avgPrice">0</span>
+        </div>
+        <div>
+          <span>p5 sales price value</span>
+          <span id="p5Price">0</span>
+        </div>
+        <div>
+          <span>p25 sales price value</span>
+          <span id="p25Price">0</span>
+        </div>
+        <div>
+          <span>p50 sales price value</span>
+          <span id="p50Price">0</span>
+        </div>
+      </section>
+      <section id="sales">
+        <h2>Vinted Sales</h2>
+      </section>
+    </main>
     <script type="text/javascript" charset="UTF-8" src="utils.js"></script>
     <script type="text/javascript" charset="UTF-8" src="portfolio.js"></script>
   </body>

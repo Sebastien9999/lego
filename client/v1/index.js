@@ -26,11 +26,29 @@ console.log(MY_FAVORITE_DEALERS[0]);
  */
 
 // 🎯 TODO 1: The highest reduction
+<<<<<<< HEAD
 // 0. I have 2 favorite lego sets shopping communities stored in MY_FAVORITE_DEALERS variable
 // 1. Create a new variable and assign it the link of the lego set with the highest reduction I can find on these 2 websites
 const highestReductionLink = "https://www.dealabs.com/bons-plans/lego-creator-31158-les-animaux-marins-3-en-1-3269092";
 // 2. Log the variable
 console.log(highestReductionLink);
+=======
+
+// 1. Find the deal with the highest reduction
+let bestDeal = deals[0];
+
+deals.forEach(deal => {
+  if (deal.reduction > bestDeal.reduction) {
+    bestDeal = deal;
+  }
+});
+
+// 2. Store the link
+const bestDealLink = bestDeal.link;
+
+// 3. Log the variable
+console.log(bestDealLink);
+>>>>>>> a32ca46 (feat(total): compute number of deals)
 
 
 /**
@@ -45,14 +63,20 @@ console.log(highestReductionLink);
 // 🎯 TODO 2: Number of deals
 // 1. Create a variable and assign it the number of deals
 const numberOfDeals = deals.length;
+<<<<<<< HEAD
 const numberOfDeals = deals.length;
 // 2. Log the variable
 console.log(numberOfDeals);
 console.log(numberOfDeals);
+=======
+// 2. Log the variable
+console.log(numberOfDeals);
+>>>>>>> a32ca46 (feat(total): compute number of deals)
 
 // 🎯 TODO 3: Website name
 // 1. Create a variable and assign it the list of shopping community name only
 const communityNames = [...new Set(deals.map(deal => deal.community))];
+<<<<<<< HEAD
 const communityNames = [...new Set(deals.map(deal => deal.community))];
 // 2. Log the variable
 console.log(communityNames);
@@ -66,11 +90,21 @@ console.log(communityNames.length);
 /// -1 if a < b
 /// 0 if a == b
 /// 1 if a > b
+=======
+// 2. Log the variable
+console.log(communityNames);
+// 3. Log how many shopping communities we have
+console.log(communityNames.length);
+
+// 🎯 TODO 4: Sort by price
+// 1. Create a function to sort the deals by price
+>>>>>>> a32ca46 (feat(total): compute number of deals)
 function sortByPrice(a, b) {
   return a.price - b.price;
 }
 // 2. Create a variable and assign it the list of sets by price from lowest to highest
 const sortedDealsByPrice = [...deals].sort(sortByPrice);
+<<<<<<< HEAD
 const sortedDealsByPrice = [...deals].sort(sortByPrice);
 // 3. Log the variable
 console.log(sortedDealsByPrice);
@@ -81,31 +115,53 @@ console.log(sortedDealsByPrice);
 /// -1 if a is more recent than b
 /// 0 if a == b
 /// 1 if a is older than b
+=======
+// 3. Log the variable
+console.log(sortedDealsByPrice);
+
+// 🎯 TODO 5: Sort by date
+// 1. Create a function to sort the deals by date
+>>>>>>> a32ca46 (feat(total): compute number of deals)
 function sortByDate(a, b) {
   return new Date(b.published) - new Date(a.published);
 }
 // 2. Create a variable and assign it the list of deals by date from recent to old
 const sortedDealsByDate = [...deals].sort(sortByDate);
+<<<<<<< HEAD
 const sortedDealsByDate = [...deals].sort(sortByDate);
 // 3. Log the variable
 console.log(sortedDealsByDate);
 console.log(sortedDealsByDate);
+=======
+// 3. Log the variable
+console.log(sortedDealsByDate);
+>>>>>>> a32ca46 (feat(total): compute number of deals)
 
 // 🎯 TODO 6: Filter a specific percentage discount range
 // 1. Filter the list of deals between 50% and 75%
 const filteredDeals = deals.filter(deal => deal.reduction >= 50 && deal.reduction <= 75);
+<<<<<<< HEAD
 const filteredDeals = deals.filter(deal => deal.reduction >= 50 && deal.reduction <= 75);
 // 2. Log the list
 console.log(filteredDeals);
 console.log(filteredDeals);
+=======
+// 2. Log the list
+console.log(filteredDeals);
+>>>>>>> a32ca46 (feat(total): compute number of deals)
 
 // 🎯 TODO 7: Average percentage discount
 // 1. Determine the average percentage discount of the deals
 const averageReduction = deals.reduce((sum, deal) => sum + deal.reduction, 0) / deals.length;
+<<<<<<< HEAD
 const averageReduction = deals.reduce((sum, deal) => sum + deal.reduction, 0) / deals.length;
 // 2. Log the average
 console.log(averageReduction);
 console.log(averageReduction);
+=======
+// 2. Log the average
+console.log(averageReduction);
+>>>>>>> a32ca46 (feat(total): compute number of deals)
 
 /**
  * 🏎
@@ -125,6 +181,7 @@ deals.forEach(deal => {
   communities[deal.community].push(deal);
 });
 
+<<<<<<< HEAD
 const communities = {};
 
 deals.forEach(deal => {
@@ -134,6 +191,8 @@ deals.forEach(deal => {
   communities[deal.community].push(deal);
 });
 
+=======
+>>>>>>> a32ca46 (feat(total): compute number of deals)
 // The key is the community name
 // The value is the array of deals for this specific community
 //
@@ -147,18 +206,25 @@ deals.forEach(deal => {
 //
 // 2. Log the variable
 console.log(communities);
+<<<<<<< HEAD
 console.log(communities);
+=======
+>>>>>>> a32ca46 (feat(total): compute number of deals)
 // 3. Log the number of deals by community
 Object.keys(communities).forEach(community => {
   console.log(`${community}: ${communities[community].length} deals`);
 });
+<<<<<<< HEAD
 Object.keys(communities).forEach(community => {
   console.log(`${community}: ${communities[community].length} deals`);
 });
+=======
+>>>>>>> a32ca46 (feat(total): compute number of deals)
 
 // 🎯 TODO 9: Sort by price for each community
 // 1. For each community, sort the deals by discount price, from highest to lowest
 Object.keys(communities).forEach(community => {
+<<<<<<< HEAD
   communities[community] = [...communities[community]].sort(
     (a, b) => Number(b.price) - Number(a.price)
   );
@@ -167,15 +233,28 @@ Object.keys(communities).forEach(community => {
 // 2. Log the sort
 console.log(communities);
 console.log(communities);
+=======
+  communities[community].sort((a, b) => b.price - a.price);
+});
+// 2. Log the sort
+console.log(communities);
+>>>>>>> a32ca46 (feat(total): compute number of deals)
 
 // 🎯 TODO 10: Sort by date for each community
 // 1. For each set, sort the deals by date, from old to recent
 Object.keys(communities).forEach(community => {
+<<<<<<< HEAD
   communities[community] = [...communities[community]].sort((a, b) => new Date(a.published) - new Date(b.published));
 });
 // 2. Log the sort
 console.log(communities);
 console.log(communities);
+=======
+  communities[community].sort((a, b) => new Date(a.published) - new Date(b.published));
+});
+// 2. Log the sort
+console.log(communities);
+>>>>>>> a32ca46 (feat(total): compute number of deals)
 
 
 /**

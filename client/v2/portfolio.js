@@ -24,6 +24,9 @@ This endpoint accepts the following optional query string parameters:
 // current deals on the page
 let currentDeals = [];
 let currentPagination = {};
+let currentFilter = 'all';
+let currentSort = 'price-asc';
+let currentSearch = '';
 
 // instantiate the selectors
 const selectShow = document.querySelector('#show-select');
@@ -31,7 +34,9 @@ const selectPage = document.querySelector('#page-select');
 const selectFilters = document.querySelector('#filters-select');
 const selectSort = document.querySelector('#sort-select');
 const selectLegoSetIds = document.querySelector('#lego-set-id-select');
-const sectionDeals= document.querySelector('#deals');
+const searchInput = document.querySelector('#search-input');
+const sectionDeals = document.querySelector('#deals');
+const sectionBestDeal = document.querySelector('#best-deal');
 const sectionSales = document.querySelector('#sales');
 const spanNbDeals = document.querySelector('#nbDeals');
 const spanNbSales = document.querySelector('#nbSales');
@@ -133,25 +138,55 @@ const renderSales = sales => {
  * Render list of deals
  * @param  {Array} deals
  */
-const renderDeals = deals => {
-  const fragment = document.createDocumentFragment();
-  const div = document.createElement('div');
+const renderBestDeal = deal => {
+  if (!deal) {
+    sectionBestDeal.innerHTML = `
+      <h2>Best Deal</h2>
+      <div class="deal-card">
+        <strong>No deal selected yet</strong>
+        <span>Use search, sorting, or filters to find the best available set.</span>
+      </div>
+    `;
+    return;
+  }
+
+  sectionBestDeal.innerHTML = `
+    <h2>Best Deal</h2>
+    <div class="deal-card">
+      <strong>${deal.title}</strong>
+      <a href="${deal.link}" target="_blank" rel="noopener noreferrer">View deal</a>
+      <span class="price">${deal.price}</span>
+      <div class="meta">
+        <span>Set id: ${deal.id}</span>
+        <span>Discount: ${deal.discount}%</span>
+        <span>Comments: ${deal.comments || 'N/A'}</span>
+        <span>Published: ${deal.published || 'unknown'}</span>
+      </div>
+    </div>
+  `;
+};
+
+const renderDeals = (deals, bestDeal) => {
   const template = deals
+    .filter(deal => !bestDeal || deal.uuid !== bestDeal.uuid)
     .map(deal => {
       return `
-      <div class="deal" id=${deal.uuid}>
+      <div class="deal-row" id="${deal.uuid}">
         <span>${deal.id}</span>
-        <a href="${deal.link}">${deal.title}</a>
-        <span>${deal.price}</span>
+        <div>
+          <a href="${deal.link}" target="_blank" rel="noopener noreferrer">${deal.title}</a>
+          <div class="meta">
+            <span>Discount ${deal.discount}%</span>
+            <span>Price ${deal.price}</span>
+          </div>
+        </div>
+        <span class="price">${deal.price}</span>
       </div>
     `;
     })
     .join('');
 
-  div.innerHTML = template;
-  fragment.appendChild(div);
-  sectionDeals.innerHTML = '<h2>Deals</h2>';
-  sectionDeals.appendChild(fragment);
+  sectionDeals.innerHTML = '<h2>Deals</h2><div id="deals-list">' + (template || '<p>No matching deals found.</p>') + '</div>';
 };
 
 /**
@@ -182,6 +217,61 @@ const renderLegoSetIds = deals => {
   selectLegoSetIds.innerHTML = options;
 };
 
+const getBestDeal = deals => {
+  if (!deals || deals.length === 0) return null;
+
+  return deals.reduce((currentBest, deal) => {
+    const discount = parseFloat(deal.discount) || 0;
+    const currentDiscount = parseFloat(currentBest.discount) || 0;
+
+    if (discount > currentDiscount) {
+      return deal;
+    }
+
+    if (discount === currentDiscount) {
+      return parseFloat(deal.price) < parseFloat(currentBest.price) ? deal : currentBest;
+    }
+
+    return currentBest;
+  }, deals[0]);
+};
+
+const sortDeals = (deals, sort) => {
+  const sorted = [...deals];
+
+  switch (sort) {
+    case 'price-asc':
+      sorted.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+      break;
+    case 'price-desc':
+      sorted.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+      break;
+    case 'date-asc':
+      sorted.sort((a, b) => new Date(b.published) - new Date(a.published));
+      break;
+    case 'date-desc':
+      sorted.sort((a, b) => new Date(a.published) - new Date(b.published));
+      break;
+    default:
+      break;
+  }
+
+  return sorted;
+};
+
+const searchDeals = (deals, searchTerm) => {
+  if (!searchTerm) return deals;
+
+  const lowerSearch = searchTerm.toLowerCase();
+  return deals.filter(deal => {
+    const title = String(deal.title || '').toLowerCase();
+    const id = String(deal.id || '').toLowerCase();
+    const discount = String(deal.discount || '').toLowerCase();
+
+    return title.includes(lowerSearch) || id.includes(lowerSearch) || discount.includes(lowerSearch);
+  });
+};
+
 /**
  * Render page selector
  * @param  {Object} pagination
@@ -192,11 +282,17 @@ const renderIndicators = pagination => {
   spanNbDeals.innerHTML = count;
 };
 
-const render = (deals, pagination) => {
-  renderDeals(deals);
-  renderPagination(pagination);
-  renderIndicators(pagination);
-  renderLegoSetIds(deals)
+const render = () => {
+  const filteredDeals = filterDeals(currentDeals, currentFilter);
+  const sortedDeals = sortDeals(filteredDeals, currentSort);
+  const searchedDeals = searchDeals(sortedDeals, currentSearch);
+  const bestDeal = getBestDeal(searchedDeals);
+
+  renderBestDeal(bestDeal);
+  renderDeals(searchedDeals, bestDeal);
+  renderPagination(currentPagination);
+  renderIndicators(currentPagination);
+  renderLegoSetIds(currentDeals);
 };
 
 /**
@@ -256,38 +352,18 @@ const filterDeals = (deals, filter) => {
 };
 
 selectFilters.addEventListener('change', (event) => {
-  const filter = event.target.value;
-  const filteredDeals = filterDeals(currentDeals, filter);
-  
-  renderDeals(filteredDeals);
+  currentFilter = event.target.value;
+  render();
 });
 
 selectSort.addEventListener('change', (event) => {
-  const sort = event.target.value;
-  let sortedDeals = [...currentDeals];
+  currentSort = event.target.value;
+  render();
+});
 
-  switch (sort) {
-    case 'price-asc':
-      // Sort by price ascending (cheapest first)
-      sortedDeals.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-      break;
-    case 'price-desc':
-      // Sort by price descending (most expensive first)
-      sortedDeals.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
-      break;
-    case 'date-asc':
-      // Sort by date ascending (most recent first)
-      sortedDeals.sort((a, b) => new Date(b.published) - new Date(a.published));
-      break;
-    case 'date-desc':
-      // Sort by date descending (oldest first)
-      sortedDeals.sort((a, b) => new Date(a.published) - new Date(b.published));
-      break;
-    default:
-      break;
-  }
-
-  renderDeals(sortedDeals);
+searchInput.addEventListener('input', (event) => {
+  currentSearch = event.target.value.trim();
+  render();
 });
 
 /**
@@ -306,5 +382,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   const deals = await fetchDeals();
 
   setCurrentDeals(deals);
-  render(currentDeals, currentPagination);
+  render();
 });
