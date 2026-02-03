@@ -26,21 +26,11 @@ console.log(MY_FAVORITE_DEALERS[0]);
  */
 
 // 🎯 TODO 1: The highest reduction
-
-// 1. Find the deal with the highest reduction
-let bestDeal = deals[0];
-
-deals.forEach(deal => {
-  if (deal.reduction > bestDeal.reduction) {
-    bestDeal = deal;
-  }
-});
-
-// 2. Store the link
-const bestDealLink = bestDeal.link;
-
-// 3. Log the variable
-console.log(bestDealLink);
+// 0. I have 2 favorite lego sets shopping communities stored in MY_FAVORITE_DEALERS variable
+// 1. Create a new variable and assign it the link of the lego set with the highest reduction I can find on these 2 websites
+const highestReductionLink = "https://www.dealabs.com/bons-plans/lego-creator-31158-les-animaux-marins-3-en-1-3269092";
+// 2. Log the variable
+console.log(highestReductionLink);
 
 
 /**
