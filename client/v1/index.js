@@ -58,6 +58,9 @@ console.log(communityNames.length);
 
 // 🎯 TODO 4: Sort by price
 // 1. Create a function to sort the deals by price
+/// -1 if a < b
+/// 0 if a == b
+/// 1 if a > b
 function sortByPrice(a, b) {
   return a.price - b.price;
 }
@@ -68,6 +71,9 @@ console.log(sortedDealsByPrice);
 
 // 🎯 TODO 5: Sort by date
 // 1. Create a function to sort the deals by date
+/// -1 if a is more recent than b
+/// 0 if a == b
+/// 1 if a is older than b
 function sortByDate(a, b) {
   return new Date(b.published) - new Date(a.published);
 }
@@ -127,15 +133,18 @@ Object.keys(communities).forEach(community => {
 // 🎯 TODO 9: Sort by price for each community
 // 1. For each community, sort the deals by discount price, from highest to lowest
 Object.keys(communities).forEach(community => {
-  communities[community].sort((a, b) => b.price - a.price);
+  communities[community] = [...communities[community]].sort(
+    (a, b) => Number(b.price) - Number(a.price)
+  );
 });
+
 // 2. Log the sort
 console.log(communities);
 
 // 🎯 TODO 10: Sort by date for each community
 // 1. For each set, sort the deals by date, from old to recent
 Object.keys(communities).forEach(community => {
-  communities[community].sort((a, b) => new Date(a.published) - new Date(b.published));
+  communities[community] = [...communities[community]].sort((a, b) => new Date(a.published) - new Date(b.published));
 });
 // 2. Log the sort
 console.log(communities);
