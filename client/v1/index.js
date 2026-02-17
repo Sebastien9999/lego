@@ -1,8 +1,8 @@
-// Invoking strict mode
+﻿// Invoking strict mode
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode#invoking_strict_mode
 'use strict';
 
-console.log('🚀 This is it.');
+console.log('­ƒÜÇ This is it.');
 
 const MY_FAVORITE_DEALERS = [
   {
@@ -19,13 +19,13 @@ console.table(MY_FAVORITE_DEALERS);
 console.log(MY_FAVORITE_DEALERS[0]);
 
 /**
- * 🌱
+ * ­ƒî▒
  * Let's go with a very very simple first todo
  * Keep pushing
- * 🌱
+ * ­ƒî▒
  */
 
-// 🎯 TODO 1: The highest reduction
+// ­ƒÄ» TODO 1: The highest reduction
 // 0. I have 2 favorite lego sets shopping communities stored in MY_FAVORITE_DEALERS variable
 // 1. Create a new variable and assign it the link of the lego set with the highest reduction I can find on these 2 websites
 const highestReductionLink = "https://www.dealabs.com/bons-plans/lego-creator-31158-les-animaux-marins-3-en-1-3269092";
@@ -34,15 +34,15 @@ console.log(highestReductionLink);
 
 
 /**
- * 🧱
- * Easy 😁?
+ * ­ƒº▒
+ * Easy ­ƒÿü?
  * Now we manipulate the variable `deals`
  * `deals` is a list of deals from several shopping communities
  * The variable is loaded by the file `data.js`
- * 🧱
+ * ­ƒº▒
  */
 
-// 🎯 TODO 2: Number of deals
+// ­ƒÄ» TODO 2: Number of deals
 // 1. Create a variable and assign it the number of deals
 const numberOfDeals = deals.length;
 <<<<<<< HEAD
@@ -55,7 +55,7 @@ console.log(numberOfDeals);
 console.log(numberOfDeals);
 >>>>>>> a32ca46 (feat(total): compute number of deals)
 
-// 🎯 TODO 3: Website name
+// ­ƒÄ» TODO 3: Website name
 // 1. Create a variable and assign it the list of shopping community name only
 const communityNames = [...new Set(deals.map(deal => deal.community))];
 <<<<<<< HEAD
@@ -67,7 +67,7 @@ console.log(communityNames);
 console.log(communityNames.length);
 console.log(communityNames.length);
 
-// 🎯 TODO 4: Sort by price
+// ­ƒÄ» TODO 4: Sort by price
 // 1. Create a function to sort the deals by price
 /// -1 if a < b
 /// 0 if a == b
@@ -78,7 +78,7 @@ console.log(communityNames);
 // 3. Log how many shopping communities we have
 console.log(communityNames.length);
 
-// 🎯 TODO 4: Sort by price
+// ­ƒÄ» TODO 4: Sort by price
 // 1. Create a function to sort the deals by price
 >>>>>>> a32ca46 (feat(total): compute number of deals)
 function sortByPrice(a, b) {
@@ -92,7 +92,7 @@ const sortedDealsByPrice = [...deals].sort(sortByPrice);
 console.log(sortedDealsByPrice);
 console.log(sortedDealsByPrice);
 
-// 🎯 TODO 5: Sort by date
+// ­ƒÄ» TODO 5: Sort by date
 // 1. Create a function to sort the deals by date
 /// -1 if a is more recent than b
 /// 0 if a == b
@@ -101,7 +101,7 @@ console.log(sortedDealsByPrice);
 // 3. Log the variable
 console.log(sortedDealsByPrice);
 
-// 🎯 TODO 5: Sort by date
+// ­ƒÄ» TODO 5: Sort by date
 // 1. Create a function to sort the deals by date
 >>>>>>> a32ca46 (feat(total): compute number of deals)
 function sortByDate(a, b) {
@@ -119,7 +119,7 @@ console.log(sortedDealsByDate);
 console.log(sortedDealsByDate);
 >>>>>>> a32ca46 (feat(total): compute number of deals)
 
-// 🎯 TODO 6: Filter a specific percentage discount range
+// ­ƒÄ» TODO 6: Filter a specific percentage discount range
 // 1. Filter the list of deals between 50% and 75%
 const filteredDeals = deals.filter(deal => deal.reduction >= 50 && deal.reduction <= 75);
 <<<<<<< HEAD
@@ -132,7 +132,7 @@ console.log(filteredDeals);
 console.log(filteredDeals);
 >>>>>>> a32ca46 (feat(total): compute number of deals)
 
-// 🎯 TODO 7: Average percentage discount
+// ­ƒÄ» TODO 7: Average percentage discount
 // 1. Determine the average percentage discount of the deals
 const averageReduction = deals.reduce((sum, deal) => sum + deal.reduction, 0) / deals.length;
 <<<<<<< HEAD
@@ -146,13 +146,13 @@ console.log(averageReduction);
 >>>>>>> a32ca46 (feat(total): compute number of deals)
 
 /**
- * 🏎
+ * ­ƒÅÄ
  * We are almost done with the `deals` variable
  * Keep pushing
- * 🏎
+ * ­ƒÅÄ
  */
 
-// 🎯 TODO 8: Deals by community
+// ­ƒÄ» TODO 8: Deals by community
 // 1. Create an object called `communities` to manipulate deals by community name 
 const communities = {};
 
@@ -203,7 +203,7 @@ Object.keys(communities).forEach(community => {
 =======
 >>>>>>> a32ca46 (feat(total): compute number of deals)
 
-// 🎯 TODO 9: Sort by price for each community
+// ­ƒÄ» TODO 9: Sort by price for each community
 // 1. For each community, sort the deals by discount price, from highest to lowest
 Object.keys(communities).forEach(community => {
 <<<<<<< HEAD
@@ -222,7 +222,7 @@ console.log(communities);
 console.log(communities);
 >>>>>>> a32ca46 (feat(total): compute number of deals)
 
-// 🎯 TODO 10: Sort by date for each community
+// ­ƒÄ» TODO 10: Sort by date for each community
 // 1. For each set, sort the deals by date, from old to recent
 Object.keys(communities).forEach(community => {
 <<<<<<< HEAD
@@ -240,12 +240,12 @@ console.log(communities);
 
 
 /**
- * 🧥
+ * ­ƒºÑ
  * Cool for your effort.
  * Now we manipulate the variable `VINTED`
  * `VINTED` is the listing of current items from https://www.vinted.fr/catalog?search_text=43230&time=1727075774&status_ids[]=6&status_ids[]=1&brand_ids[]=89162&page=1
  * The target set is 43230 (Walt Disney Tribute Camera)
- * 🧥
+ * ­ƒºÑ
  */
 
 const VINTED = [
@@ -280,7 +280,7 @@ const VINTED = [
   {
     link: "https://www.vinted.fr/items/4167039593-lego-disney-la-camera-hommage-a-walt-disney",
     price: "104.65",
-    title: "LEGO - Disney - La caméra Hommage à Walt Disney",
+    title: "LEGO - Disney - La cam├®ra Hommage ├á Walt Disney",
     published: "Fri, 01 Mar 2024 13:58:12 GMT",
     uuid: "22f38d93-d41b-57ec-b418-626b8dc98859"
   },
@@ -315,21 +315,21 @@ const VINTED = [
   {
     link: "https://www.vinted.fr/items/5635223988-lego-disney-43230-camara-en-homenaje-a-walt-disney",
     price: "85.74",
-    title: "Lego  Disney 43230 Cámara en Homenaje a Walt Disney",
+    title: "Lego  Disney 43230 C├ímara en Homenaje a Walt Disney",
     published: "Sat, 11 Jan 2025 14:16:24 GMT",
     uuid: "3500f71a-cb5c-5628-8231-89aa67c7aecf"
   },
   {
     link: "https://www.vinted.fr/items/5564553918-nuevo-43230-lego-camara-homenaje-disney",
     price: "95.2",
-    title: "NUEVO |  43230 LEGO Cámara Homenaje Disney",
+    title: "NUEVO |  43230 LEGO C├ímara Homenaje Disney",
     published: "Fri, 27 Dec 2024 11:55:12 GMT",
     uuid: "fc70a57a-06f5-5428-bbd0-5baeca37e552"
   },
   {
     link: "https://www.vinted.fr/items/5559166527-lego-disney-walt-disney-eerbetoon-camera-100ste-verjaardag-set-voor-volwassenen-nr-43230",
     price: "86.8",
-    title: "LEGO Disney Walt Disney eerbetoon – camera 100ste Verjaardag Set voor Volwassenen -nr 43230 -",
+    title: "LEGO Disney Walt Disney eerbetoon ÔÇô camera 100ste Verjaardag Set voor Volwassenen -nr 43230 -",
     published: "Wed, 25 Dec 2024 11:20:30 GMT",
     uuid: "6ca42020-9c65-561e-b742-da2a21355644"
   },
@@ -350,7 +350,7 @@ const VINTED = [
   {
     link: "https://www.vinted.fr/items/5630073060-lego-43230-walt-disney-tribute-camera",
     price: "84.6",
-    title: "LEGO 43230 Walt Disney Tribute Camera 🎥",
+    title: "LEGO 43230 Walt Disney Tribute Camera ­ƒÄÑ",
     published: "Fri, 10 Jan 2025 13:47:28 GMT",
     uuid: "e6425ff6-c149-5b68-9c30-35c29cf8f1c0"
   },
@@ -441,14 +441,14 @@ const VINTED = [
   {
     link: "https://www.vinted.fr/items/5620486038-lego-camara-en-homenaje-a-walt-disney",
     price: "105.7",
-    title: "Lego Cámara en homenaje a Walt Disney",
+    title: "Lego C├ímara en homenaje a Walt Disney",
     published: "Wed, 08 Jan 2025 12:36:42 GMT",
     uuid: "dfe21e8f-036d-5a62-a9f2-cd083ef440be"
   },
   {
     link: "https://www.vinted.fr/items/5504898807-lego-43212-le-train-en-fete-disney-mickey-minnie-vaiana-peter-pan-fee-clochette-woody",
     price: "42.6",
-    title: "Lego 43212 - Le train en fête Disney Mickey Minnie Vaiana Peter Pan Fée Clochette Woody",
+    title: "Lego 43212 - Le train en f├¬te Disney Mickey Minnie Vaiana Peter Pan F├®e Clochette Woody",
     published: "Mon, 09 Dec 2024 12:09:27 GMT",
     uuid: "af8db740-80fb-5ac4-9550-e63a17ed9ac1"
   },
@@ -469,14 +469,14 @@ const VINTED = [
   {
     link: "https://www.vinted.fr/items/3605077693-notice-lego-camera-disney",
     price: "5.95",
-    title: "Notice Lego « Caméra Disney »",
+    title: "Notice Lego ┬½┬áCam├®ra Disney┬á┬╗",
     published: "Sat, 14 Oct 2023 08:01:48 GMT",
     uuid: "aee175f6-bce6-5f7d-9b99-f6ec96671c4a"
   },
   {
     link: "https://www.vinted.fr/items/5607305651-lego-disney-43230-camera-de-tributo-da-walt-disney",
     price: "95.2",
-    title: "LEGO Disney 43230 Câmera de Tributo da Walt Disney",
+    title: "LEGO Disney 43230 C├ómera de Tributo da Walt Disney",
     published: "Sun, 05 Jan 2025 17:18:29 GMT",
     uuid: "78f9be9a-e51f-5fff-ba37-771f7631dc63"
   },
@@ -490,7 +490,7 @@ const VINTED = [
   {
     link: "https://www.vinted.fr/items/4872522741-la-camera-hommage-a-walt-disney-lego-set-43230",
     price: "100.45",
-    title: "La caméra Hommage à Walt Disney lego set 43230",
+    title: "La cam├®ra Hommage ├á Walt Disney lego set 43230",
     published: "Sat, 10 Aug 2024 21:41:03 GMT",
     uuid: "5357bbf5-7232-5a6a-b48c-1e4f9a26ac68"
   },
@@ -504,7 +504,7 @@ const VINTED = [
   {
     link: "https://www.vinted.fr/items/4126171841-lego-camera-disney-100ans-43230",
     price: "95.2",
-    title: "Légo Caméra Disney 100ans 43230",
+    title: "L├®go Cam├®ra Disney 100ans 43230",
     published: "Tue, 20 Feb 2024 17:47:11 GMT",
     uuid: "a4ca82af-3e8b-518a-8f55-59e0cbc1d81d"
   },
@@ -518,31 +518,31 @@ const VINTED = [
 ];
 
 /**
- * 💶
+ * ­ƒÆÂ
  * Let's talk about money now
  * Do some Maths
- * 💶
+ * ­ƒÆÂ
  */
 
-// 🎯 TODO 11: Compute the average, the p5 and the p25 price value
+// ­ƒÄ» TODO 11: Compute the average, the p5 and the p25 price value
 // 1. Compute the average price value of the listing
 // 2. Compute the p5 price value of the listing
 // 3. Compute the p25 price value of the listing
 // The p25 value (25th percentile) is the lower value expected to be exceeded in 25% of the vinted items
 
-// 🎯 TODO 12: Very old listed items
+// ­ƒÄ» TODO 12: Very old listed items
 // // 1. Log if we have very old items (true or false)
 // // A very old item is an item `published` more than 3 weeks ago.
 
-// 🎯 TODO 13: Find a specific item
+// ­ƒÄ» TODO 13: Find a specific item
 // 1. Find the item with the uuid `f2c5377c-84f9-571d-8712-98902dcbb913`
 // 2. Log the item
 
-// 🎯 TODO 14: Delete a specific item
+// ­ƒÄ» TODO 14: Delete a specific item
 // 1. Delete the item with the uuid `f2c5377c-84f9-571d-8712-98902dcbb913`
 // 2. Log the new list of items
 
-// 🎯 TODO 5: Save a favorite item
+// ­ƒÄ» TODO 5: Save a favorite item
 // We declare and assign a variable called `sealedCamera`
 let sealedCamera = {
   link: "https://www.vinted.fr/items/5563396347-lego-43230-omaggio-a-walter-disney-misb",
@@ -573,10 +573,10 @@ sealedCamera = {
 // 3. Update `camera` property with `favorite` to true WITHOUT changing sealedCamera properties
 
 
-// 🎯 TODO 11: Compute the profitability
+// ­ƒÄ» TODO 11: Compute the profitability
 // From a specific deal called `deal`
 const deal = {
-  'title':  'La caméra Hommage à Walt Disney',
+  'title':  'La cam├®ra Hommage ├á Walt Disney',
   'retail': 75.98,
   'price': 56.98,
   'legoId': '43230'
@@ -588,11 +588,11 @@ const deal = {
 
 
 /**
- * 🎬
+ * ­ƒÄ¼
  * The End: last thing to do
- * 🎬
+ * ­ƒÄ¼
  */
 
-// 🎯 LAST TODO: Save in localStorage
+// ­ƒÄ» LAST TODO: Save in localStorage
 // 1. Save MY_FAVORITE_DEALERS in the localStorage
 // 2. log the localStorage
